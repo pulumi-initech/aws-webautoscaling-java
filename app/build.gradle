@@ -1,0 +1,47 @@
+plugins {
+    id 'application'
+    id 'io.freefair.lombok' version '8.12'
+}
+
+repositories {
+    maven { // The google mirror is less flaky than mavenCentral()
+        url("https://maven-central.storage-download.googleapis.com/maven2/")
+    }
+    mavenCentral()
+    mavenLocal()
+}
+
+dependencies {
+    implementation 'com.google.guava:guava:33.3.1-jre'
+    implementation 'com.pulumi:pulumi:(,1.0]'
+    implementation 'com.pulumi:aws:6.66.3'
+    implementation 'com.pulumi:tls:5.0.0'
+
+    implementation 'org.junit.jupiter:junit-jupiter:5.11.4'
+
+    implementation 'org.assertj:assertj-core:3.27.3'
+
+    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
+
+application {
+    mainClass = project.hasProperty("mainClass")
+            ? project.getProperty("mainClass")
+            : 'myproject.WebserverInfra'
+}
+
+tasks.named('test', Test) {
+    useJUnitPlatform()
+
+    maxHeapSize = '1G'
+
+    testLogging {
+        events "passed"
+    }
+}

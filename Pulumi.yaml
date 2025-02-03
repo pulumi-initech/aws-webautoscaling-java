@@ -1,0 +1,7 @@
+name: aws-webautoscaling-java
+description: A full featured autoscaling web example Java Pulumi program with Gradle builds
+runtime: java
+config:
+  pulumi:tags:
+    value:
+      pulumi:template: java-gradle
