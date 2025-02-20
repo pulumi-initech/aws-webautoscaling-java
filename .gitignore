@@ -354,4 +354,6 @@ MigrationBackup/
 
 .gradle/
 .vscode/
- /build/
+/build/
+/app/build/
+/lib/build/
