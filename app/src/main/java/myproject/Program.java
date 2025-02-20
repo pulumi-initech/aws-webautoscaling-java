@@ -7,6 +7,11 @@ import com.pulumi.aws.route53.inputs.GetZoneArgs;
 import com.pulumi.core.Output;
 import java.util.List;
 
+import com.pulumi.components.WebEnvironment;
+import com.pulumi.components.inputs.WebEnvironmentArgs;
+
+import com.pulumi.components.DnsValidatedCertificate;
+
 public class Program {
 
   public static void main(String[] args) {
@@ -16,7 +21,7 @@ public class Program {
   // A simple stack to be tested.
   static void stack(Context ctx) {
 
-    var config = ctx.config();
+	var config = ctx.config();
 
     var vpcId = config.get("VpcId").orElse("");
     var vpcCidr = config.get("CidrBlock").orElse("");

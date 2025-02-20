@@ -22,6 +22,8 @@ dependencies {
     implementation 'org.assertj:assertj-core:3.27.3'
 
     testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
+
+	implementation project(':lib')
 }
 
 java {
@@ -33,7 +35,7 @@ java {
 application {
     mainClass = project.hasProperty("mainClass")
             ? project.getProperty("mainClass")
-            : 'myproject.WebserverInfra'
+            : 'myproject.Program'
 }
 
 tasks.named('test', Test) {

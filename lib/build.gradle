@@ -1,0 +1,25 @@
+plugins {
+	id 'java-library'
+    id 'io.freefair.lombok' version '8.12'
+}
+
+repositories {
+    maven { // The google mirror is less flaky than mavenCentral()
+        url("https://maven-central.storage-download.googleapis.com/maven2/")
+    }
+    mavenCentral()
+    mavenLocal()
+}
+
+dependencies {
+    implementation 'com.google.guava:guava:33.3.1-jre'
+    implementation 'com.pulumi:pulumi:(,1.0]'
+    implementation 'com.pulumi:aws:6.66.3'
+    implementation 'com.pulumi:tls:5.0.0'
+}
+
+java {
+    toolchain {
+        languageVersion = JavaLanguageVersion.of(21)
+    }
+}
