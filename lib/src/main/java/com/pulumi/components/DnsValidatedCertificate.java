@@ -6,8 +6,10 @@ import com.pulumi.aws.acm.CertificateValidation;
 import com.pulumi.aws.acm.CertificateValidationArgs;
 import com.pulumi.aws.route53.Record;
 import com.pulumi.aws.route53.RecordArgs;
+import com.pulumi.core.annotations.Export;
 import com.pulumi.core.Either;
 import com.pulumi.core.Output;
+import com.pulumi.components.inputs.DnsValidatedCertificateArgs;
 import com.pulumi.resources.ComponentResource;
 import com.pulumi.resources.ComponentResourceOptions;
 import com.pulumi.resources.CustomResourceOptions;
@@ -16,21 +18,22 @@ import java.util.Map;
 
 public class DnsValidatedCertificate extends ComponentResource {
 
+  @Export(name="certificateArn")
   public final Output<String> certificateArn;
 
   public DnsValidatedCertificate(
-      String name, String domainName, Output<String> zoneId, ComponentResourceOptions options) {
-    super("custom:resource:DnsValidatedCertificate", name, options);
+      String name, DnsValidatedCertificateArgs args, ComponentResourceOptions options) {
+    super("custom:index:DnsValidatedCertificate", name, options);
 
     var cert =
         new Certificate(
             "default",
-            new CertificateArgs.Builder().domainName(domainName).validationMethod("DNS").build(),
+            new CertificateArgs.Builder().domainName(args.getDomainName()).validationMethod("DNS").build(),
             CustomResourceOptions.builder().parent(this).build());
 
     Record certValidationRecord =
         new Record(
-            domainName + "-valid",
+            "domainName-valid",
             new RecordArgs.Builder()
                 .name(
                     cert.domainValidationOptions()
@@ -43,7 +46,7 @@ public class DnsValidatedCertificate extends ComponentResource {
                         .apply(
                             o -> Output.of(Either.ofLeft(o.getFirst().resourceRecordType().get()))))
                 .ttl(60)
-                .zoneId(zoneId)
+                .zoneId(args.getZoneId())
                 .build(),
             CustomResourceOptions.builder().parent(this).build());
 

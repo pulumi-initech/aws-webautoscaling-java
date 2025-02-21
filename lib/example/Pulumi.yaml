@@ -1,0 +1,15 @@
+name: webserver-yaml
+runtime: yaml
+plugins:
+  providers:
+    - name: custom
+      path: ..
+resources:
+  cert:
+    type: custom:index:DnsValidatedCertificate
+    properties:
+      domainName: foo.example.com
+      zoneId: myzone
+outputs:
+  certificateArn:
+    value: ${cert.certificateArn}
