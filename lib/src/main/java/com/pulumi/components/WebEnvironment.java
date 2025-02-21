@@ -44,7 +44,7 @@ import java.util.Map;
 
 public class WebEnvironment extends ComponentResource {
   public WebEnvironment(String name, WebEnvironmentArgs args, ComponentResourceOptions options) {
-    super("custom:resource:Webserver", name, options);
+    super("custom:index:WebEnvironment", name, options);
 
     var albSg =
         new SecurityGroup(
