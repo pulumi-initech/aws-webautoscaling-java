@@ -1,0 +1,43 @@
+{
+  "name": "acm",
+  "displayName": "acm",
+  "resources": {
+    "acm:index:DnsValidatedCertificate": {
+      "isComponent": true,
+      "inputProperties": {
+        "domainName": {
+          "type": "string"
+        },
+        "zoneId": {
+          "type": "string"
+        }
+      },
+      "requiredInputs": [],
+      "type": "object",
+      "properties": {
+        "certificateArn": {
+          "type": "string"
+        }
+      },
+      "required": []
+    }
+  },
+  "types": {},
+  "language": {
+    "python": {
+      "respectSchemaVersion": true
+    },
+    "csharp": {
+      "respectSchemaVersion": true
+    },
+    "java": {
+      "respectSchemaVersion": true
+    },
+    "go": {
+      "respectSchemaVersion": true
+    },
+    "nodejs": {
+      "respectSchemaVersion": true
+    }
+  }
+}

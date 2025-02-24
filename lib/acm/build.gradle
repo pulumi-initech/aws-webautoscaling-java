@@ -1,6 +1,7 @@
 plugins {
-    id 'application'
+	id 'java-library'
     id 'io.freefair.lombok' version '8.12'
+    id 'application'
 }
 
 repositories {
@@ -16,15 +17,7 @@ dependencies {
     implementation 'com.pulumi:pulumi:1.4.0'
     implementation 'com.pulumi:aws:6.66.3'
     implementation 'com.pulumi:tls:5.0.0'
-
-    implementation 'org.junit.jupiter:junit-jupiter:5.11.4'
-
-    implementation 'org.assertj:assertj-core:3.27.3'
-
-    testRuntimeOnly 'org.junit.platform:junit-platform-launcher'
-
-    implementation project(':lib:acm')
-	implementation project(':lib:web')
+    implementation 'org.slf4j:slf4j-nop:2.0.12'
 }
 
 java {
@@ -34,17 +27,5 @@ java {
 }
 
 application {
-    mainClass = project.hasProperty("mainClass")
-            ? project.getProperty("mainClass")
-            : 'myproject.Program'
-}
-
-tasks.named('test', Test) {
-    useJUnitPlatform()
-
-    maxHeapSize = '1G'
-
-    testLogging {
-        events "passed"
-    }
+    mainClass = "com.pulumi.components.acm.App"
 }

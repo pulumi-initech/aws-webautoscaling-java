@@ -1,0 +1,69 @@
+{
+  "name": "web",
+  "displayName": "web",
+  "resources": {
+    "web:index:WebEnvironment": {
+      "isComponent": true,
+      "inputProperties": {
+        "publicSubnetIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "imageId": {
+          "type": "string"
+        },
+        "certificateArn": {
+          "type": "string"
+        },
+        "instanceCount": {
+          "type": "integer"
+        },
+        "vpcId": {
+          "type": "string"
+        },
+        "instanceType": {
+          "type": "string"
+        },
+        "zoneId": {
+          "type": "string"
+        },
+        "subdomain": {
+          "type": "string"
+        },
+        "privateSubnetIds": {
+          "type": "array",
+          "items": {
+            "type": "string"
+          }
+        },
+        "vpcCidr": {
+          "type": "string"
+        }
+      },
+      "requiredInputs": [],
+      "type": "object",
+      "properties": {},
+      "required": []
+    }
+  },
+  "types": {},
+  "language": {
+    "python": {
+      "respectSchemaVersion": true
+    },
+    "csharp": {
+      "respectSchemaVersion": true
+    },
+    "java": {
+      "respectSchemaVersion": true
+    },
+    "go": {
+      "respectSchemaVersion": true
+    },
+    "nodejs": {
+      "respectSchemaVersion": true
+    }
+  }
+}

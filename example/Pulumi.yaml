@@ -1,0 +1,42 @@
+name: webserver-yaml
+runtime: yaml
+plugins:
+  providers:
+    - name: acm
+      path: ../lib/acm
+    - name: web
+      path: ../lib/web
+config:
+  instanceType:
+    type: string
+    default: m3.medium
+  instanceCount:
+    type: integer
+    default: 2
+resources:
+  cert:
+    type: acm:index:DnsValidatedCertificate
+    properties:
+      domainName: foo.example.com
+      zoneId: myzone
+  web:
+    type: web:index:WebEnvironment
+    properties:
+      vpcId: ${VpcId}
+      vpcCidr: ${CidrBlock}
+      publicSubnetIds: ${PublicSubnetIds}
+      privateSubnetIds: ${PrivateSubnetIds}
+      imageId: ${imageId}
+      instanceType: ${instanceType}
+      instanceCount: ${instanceCount}
+      subdomain: ${subDomain}
+      zoneId:
+        fn::invoke:
+          function: aws:route53:getZone
+          arguments:
+            name: ${hostedZoneName}
+          return: zoneId
+      certificateArn: ${cert.certificateArn}
+outputs:
+  certificateArn:
+    value: ${cert.certificateArn}

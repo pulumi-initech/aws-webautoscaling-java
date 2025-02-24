@@ -7,6 +7,7 @@ import static org.junit.jupiter.api.DynamicTest.dynamicTest;
 
 import com.pulumi.aws.ec2.SecurityGroup;
 import com.pulumi.aws.ec2.outputs.SecurityGroupIngress;
+import com.pulumi.components.web.WebEnvironment;
 import com.pulumi.test.Mocks;
 import com.pulumi.test.PulumiTest;
 import java.util.Optional;
@@ -59,7 +60,7 @@ class InfraTest {
 																			.anyMatch(b -> b.equals("0.0.0.0/0"))))
 															.describedAs(
 																	"Illegal SSH port 22 open to the Internet (CIDR 0.0.0.0/0) on group %s",
-																	extractValue(sg.getUrn()))
+																	extractValue(sg.arn()))
 															.acceptsAll(ingress);
 												}
 											});
