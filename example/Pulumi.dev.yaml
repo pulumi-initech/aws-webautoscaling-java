@@ -1,0 +1,7 @@
+environment:
+  - shared/aws-dev
+  - aws-vpc-base-cs/dev-outputs
+config:
+  hostedZoneName: pulumi-ce.team
+  subDomain: initech-dev
+  imageId: ami-0850aa6a716348ce1
